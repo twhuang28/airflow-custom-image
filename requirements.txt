@@ -39,7 +39,6 @@ six==1.10.0
 sqlparse==0.3.0
 toolz==0.10.0
 tqdm==4.36.1
-unica_tools
 Unidecode==1.1.1
 xlrd==1.0.0
 
