@@ -4,10 +4,9 @@
 
 - clone airflow repo
 - install breeze shell deps
-- ref aboe shell
+- ref above shell
 
-
-```
+```=shell
 ./breeze build-image --production-image \
 --python 3.6 \
 --install-airflow-version="1.10.14" \
