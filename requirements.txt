@@ -12,7 +12,6 @@ geopandas==0.4.0
 lightgbm==2.2.1
 lxml==4.2.5
 matplotlib==3.0.3
-mlaas_tools
 mpmath==1.1.0
 multiprocess==0.70.9
 numpy==1.17.3
