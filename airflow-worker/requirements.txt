@@ -1,6 +1,3 @@
 confluent-kafka
 psycopg2==2.9.1
-pytest
-python-ldap
 kubernetes
-apache-airflow[amazon, postgres, kubernetes]
