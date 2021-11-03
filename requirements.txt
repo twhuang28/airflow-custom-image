@@ -1,0 +1,6 @@
+confluent-kafka==1.5.0
+psycopg2==2.9.1
+pytest
+pyspark==3.1.2 
+apache-airflow-providers-apache-spark==2.0.1 
+apache-airflow-providers-cncf-kubernetes==2.0.2
