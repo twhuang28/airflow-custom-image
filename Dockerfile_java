@@ -1,17 +1,18 @@
-FROM twhuang28/airflow:2.1.2-python3.6-base-v1 as jdk_full
+FROM twhuang28/airflow:2.1.2-python3.6-base-v4 as jdk_full
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+USER root
 WORKDIR /opt
+
+COPY openjdk-11.0.1_linux-x64_bin.tar.gz /opt/openjdk.tar.gz
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
-        curl \
-    && curl \
-        -L \
-        -o openjdk.tar.gz \
-        https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_linux-x64_bin.tar.gz \
+        curl libc6 libpam-modules krb5-user libnss3 procps\
     && mkdir jdk \
+    && ls -al \
     && tar zxf openjdk.tar.gz -C jdk --strip-components=1 \
     && rm -rf openjdk.tar.gz \
     && apt-get -y --purge autoremove curl \
@@ -21,5 +22,17 @@ RUN apt-get update \
     && javac --version \
     && jlink --version
 
+
+RUN \
+    mkdir -p /opt/spark && \
+    mkdir -p /opt/spark/work-dir
+
+COPY jars /opt/spark/jars
+COPY bin /opt/spark/bin
+COPY sbin /opt/spark/sbin
+
+ENV SPARK_HOME /opt/spark
+
+
+USER 50000
 WORKDIR /opt/airflow
-#ENTRYPOINT ["java"]

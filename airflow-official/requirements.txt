@@ -1,4 +1,0 @@
-pytest
-confluent-kafka
-psycopg2==2.9.1
-kubernetes
