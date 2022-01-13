@@ -1,0 +1,17 @@
+FROM twhuang28/airflow:2.1.2-python3.7-libsndfile1-v1
+
+USER root
+
+RUN apt-get update
+RUN apt-get install -y software-properties-common
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/debian10/x86_64/7fa2af80.pub
+RUN add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/debian10/x86_64/ /"
+RUN add-apt-repository contrib
+RUN apt update
+RUN apt-get install -y cuda
+
+RUN export CUDA_HOME=/usr/local/cuda-11.4
+RUN export PATH=$PATH:/usr/local/cuda-11.4/bin
+RUN export LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64:$PATH
+
+USER 1001
