@@ -20,6 +20,50 @@
 docker push twhuang28/airflow:2.1.2-python3.6-base-v7
 ```
 
+## Build base image with lftp for batch to unica
+```
+./breeze build-image --production-image  \
+--image-tag twhuang28/airflow:2.1.2-python3.6-lftp \
+--install-airflow-version "2.1.2" \
+--python 3.6 \
+--backend postgres \
+--postgres-version 12 \
+--disable-mysql-client-installation \
+--disable-pip-cache \
+--additional-dev-apt-deps "libldap2-dev libsasl2-dev libspatialindex-dev" \
+--additional-runtime-apt-deps "gcc g++ vim slapd ldap-utils tox lcov valgrind libspatialindex-c5 libspatialindex5 python3-dev libpq-dev lftp" \
+--additional-python-deps "psycopg2==2.9.1 pytest apache-airflow-providers-cncf-kubernetes==2.0.2" \
+--kind-version v0.11.1 \
+--helm-version v3.6.3
+
+docker push twhuang28/airflow:2.1.2-python3.6-lftp
+```
+
+## Build libsndfile1 for MLaaS 2.0
+```
+./breeze build-image --production-image  \
+--image-tag twhuang28/airflow:2.1.2-python3.7-libsndfile1-v1 \
+--install-airflow-version "2.1.2" \
+--python 3.7 \
+--backend postgres \
+--postgres-version 12 \
+--disable-mysql-client-installation \
+--disable-pip-cache \
+--additional-dev-apt-deps "libldap2-dev libsasl2-dev libspatialindex-dev" \
+--additional-runtime-apt-deps "gcc g++ vim slapd ldap-utils tox lcov valgrind libspatialindex-c5 libspatialindex5 python3-dev libpq-dev lftp libsndfile1" \
+--additional-python-deps "confluent-kafka==1.5.0 psycopg2==2.9.1 pytest apache-airflow-providers-cncf-kubernetes==2.0.2 apache-airflow[statsd]==2.1.2 apache-airflow-providers-apache-spark==2.0.1" \
+--kind-version v0.11.1 \
+--helm-version v3.6.3
+
+docker push twhuang28/airflow:2.1.2-python3.7-libsndfile1-v1
+```
+
+## Build libsndfile1-cuda for AICloud
+```
+docker build -t airflow:2.1.2-python3.7-libsndfile1-cuda-v1 -f Dockerfile_cuda .
+docker push twhuang28/airflow:2.1.2-python3.7-libsndfile1-cuda-v1
+```
+
 ## Packages in airflow base image 
 ```
 dal                                      1.2.7
@@ -308,19 +352,3 @@ zope.event                               4.5.0
 zope.interface                           5.4.0
 ```
 
-## Build base image with lftp
-```
-./breeze build-image --production-image  \
---image-tag twhuang28/airflow:2.1.2-python3.6-lftp \
---install-airflow-version "2.1.2" \
---python 3.6 \
---backend postgres \
---postgres-version 12 \
---disable-mysql-client-installation \
---disable-pip-cache \
---additional-dev-apt-deps "libldap2-dev libsasl2-dev libspatialindex-dev" \
---additional-runtime-apt-deps "gcc g++ vim slapd ldap-utils tox lcov valgrind libspatialindex-c5 libspatialindex5 python3-dev libpq-dev lftp" \
---additional-python-deps "psycopg2==2.9.1 pytest apache-airflow-providers-cncf-kubernetes==2.0.2" \
---kind-version v0.11.1 \
---helm-version v3.6.3
-```
